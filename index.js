@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const dbUrl =
   "mongodb+srv://escova:a8lJahMq1t3cRNdF@cluster0.hucmk34.mongodb.net";
@@ -40,13 +40,13 @@ async function main() {
   });
 
   // Read by ID - [GET] /item/:id
-  app.get("/item/:id", function (req, res) {
-    // Pegamos o ID de rota e subtraímos 1 para ficar
-    // equivalente ao índice da lista que começa em 0
-    const id = req.params.id - 1;
+  app.get("/item/:id",async function (req, res) {
+    const id = req.params.id;
 
-    // Acessamos o item na lista, usando o índice corrigido
-    const item = lista[id];
+    // Acessamos o item na collection, usando o object id
+    const item = await collection.findOne({
+      _id: new ObjectId(id)
+    })
 
     // Enviamos o item como resposta do endpoint
     res.send(item);

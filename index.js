@@ -1,10 +1,9 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
-
-const dbUrl =
-  "mongodb+srv://escova:a8lJahMq1t3cRNdF@cluster0.hucmk34.mongodb.net";
+require('dotenv').config()
+const dbUrl = process.env.DATABASE_URL;
 const client = new MongoClient(dbUrl);
-const dbName = "Ocean";
+const dbName = process.env.DATABASE_NAME;
 
 async function main() {
   console.log("conectando ao banco de dados...");

@@ -29,9 +29,6 @@ async function main() {
     res.send("Olá, mundo!");
   });
 
-  const lista = ["Rick Sanchez", "Morty Smith", "Summer Smith"];
-  //              0               1              2
-
   // Read All - [GET] /item
   app.get("/item", async function (req, res) {
     const itens = await collection.find().toArray();
